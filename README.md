@@ -8,7 +8,7 @@
 Install `slush-twg` globally:
 
 ```bash
-$ npm install -g slush-twg
+$ npm install -g gulp slush slush-twg
 ```
 
 ### Usage
