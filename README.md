@@ -1,4 +1,4 @@
-# Slush Twg [![Build Status](https://secure.travis-ci.org/themarkappleby/slush-twg.png?branch=master)](https://travis-ci.org/themarkappleby/slush-twg) [![NPM version](https://badge-me.herokuapp.com/api/npm/slush-twg.png)](http://badges.enytc.com/for/npm/slush-twg)
+# Slush Twg 
 
 > A Slush generator for boilerplate node/gulp projects
 
