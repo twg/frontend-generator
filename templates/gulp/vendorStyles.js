@@ -13,7 +13,7 @@ gulp.task('vendor:styles', ['clean'], function(){
     .pipe(concat('vendor.css'))
     .pipe(minify().on('error', notify.onError({
       title: 'Vendor Styles Error',
-      message: "\n#{error.message}"
+      message: "\n<%= appError %>"
     })))
     .pipe(gulp.dest(paths.vendor.styles.dest));
 });

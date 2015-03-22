@@ -13,7 +13,7 @@ gulp.task('vendor:scripts', ['clean'], function(){
     .pipe(concat('vendor.js'))
     .pipe(uglify().on('error', notify.onError({
       title: 'Vendor Scripts Error',
-      message: "\n#{error.message}"
+      message: "\n<%= appError %>"
     })))
     .pipe(gulp.dest(paths.vendor.scripts.dest));
 });

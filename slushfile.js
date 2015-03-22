@@ -68,28 +68,8 @@ gulp.task('default', function (done) {
         type: 'checkbox',
         choices: [
           {
-            name: 'AngularJS',
-            value: 'angularjs',
-            checked: true
-          },
-          {
-            name: 'AngularUI Router',
-            value: 'uirouter',
-            checked: true
-          },
-          {
-            name: 'Lodash',
-            value: 'lodash',
-            checked: true
-          },
-          {
-            name: 'TWG Front-end Grid',
-            value: 'grid',
-            checked: true
-          },
-          {
-            name: 'Trendsetter',
-            value: 'trendsetter',
+            name: 'TWG Frontend Scaffolding',
+            value: 'scaffolding',
             checked: true
           }
         ]
@@ -100,7 +80,8 @@ gulp.task('default', function (done) {
     inquirer.prompt(prompts,
         function (answers) {
             answers.appNameSlug = _.slugify(answers.appName);
-            gulp.src(__dirname + '/templates/**')
+            answers.appError = '<%= error.message %>';
+            gulp.src([__dirname + '/templates/**'], {dot: true})
                 .pipe(template(answers))
                 .pipe(rename(function (file) {
                     if (file.basename[0] === '_') {

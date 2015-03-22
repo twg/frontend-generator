@@ -15,7 +15,7 @@ gulp.task('scripts', ['clean'], function(){
 
     .pipe(uglify().on('error', notify.onError({
       title: 'Uglify Error',
-      message: "\n#{error.message}"
+      message: "\n<%= appError %>"
     })))
 
     .pipe(gulp.dest(paths.scripts.dest));

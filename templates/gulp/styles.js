@@ -20,7 +20,7 @@ gulp.task('styles', ['clean'], function(){
       compress: true
     }).on('error', notify.onError({
       title: 'Stylus Error',
-      message: "\n#{error.message}"
+      message: "\n<%= appError %>"
     })))
 
     .pipe(autoprefixer())
