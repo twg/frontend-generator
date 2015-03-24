@@ -13,4 +13,3 @@ gulp.task('templates', ['clean', 'scripts', 'styles'], function(){
 
     .pipe(gulp.dest(paths.templates.dest));
 });
-

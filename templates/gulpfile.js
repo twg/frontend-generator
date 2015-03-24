@@ -4,9 +4,7 @@ requireDir('./gulp');
 
 gulp.task('build', [
   'styles',
-  'vendor:styles',
   'scripts',
-  'vendor:scripts',
   'templates',
   'revision'
 ]);

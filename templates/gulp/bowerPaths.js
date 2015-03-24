@@ -1,6 +1,10 @@
 module.exports = {
-  scripts: 'bower_components/angular/angular.js',
+  scripts: [
+  ],
+
   styles: [
-    'bower_components/angular/angular-csp.css'
+    <% if(appIncludes.indexOf('scaffolding')>-1){%>
+      'bower_components/twg-frontend-scaffolding/dist/_scaffolding.styl' 
+    <%}%>
   ]
 };

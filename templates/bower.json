@@ -14,9 +14,11 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "latest"
-    <% if(appIncludes.indexOf('scaffolding') > -1){ %>
-    ,"twg-frontend-scaffolding": "latest"
+    <% if(appIncludes.indexOf("scaffolding") > -1){ %>
+    "angular-latest": "latest",
+    <% } %>
+    <% if(appIncludes.indexOf("scaffolding") > -1){ %>
+    "twg-frontend-scaffolding": "latest"
     <% } %>
   }
 }

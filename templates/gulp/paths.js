@@ -3,12 +3,12 @@ var bowerPaths = require('./bowerPaths.js');
 module.exports = {
   root: 'dist/',
   styles: {
-    watch: 'lib/**/*.styl',
-    src: 'lib/styles.styl',
+    watch: ['lib/**/*.styl', '!lib/vendor/**/*'],
+    src: 'lib/**/styles.styl',
     dest: 'dist/css'
   },
   scripts: {
-    watch: 'lib/**/*.js',
+    watch: ['lib/**/*.js', '!lib/vendor/**/*'],
     src: 'lib/**/*.js',
     dest: 'dist/js'
   },
@@ -19,14 +19,14 @@ module.exports = {
   },
   vendor: {
     styles: {
-      watch: 'bower_components/**/*.css',
+      watch: ['bower_components/**/*.css', 'bower_components/**/*.styl'],
       src: bowerPaths.styles,
-      dest: 'dist/css'
+      dest: 'lib/styles/vendor'
     },
     scripts: {
       watch: 'bower_components/**/*.js',
       src: bowerPaths.scripts,
-      dest: 'dist/js'
+      dest: 'lib/scripts/vendor'
     }
   }
 };

@@ -9,8 +9,10 @@ var autoprefixer = require('gulp-autoprefixer');
 var notify = require('gulp-notify');
 var minify = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
+var concat = require('gulp-concat');
 
-gulp.task('styles', ['clean'], function(){
+gulp.task('styles', ['vendor:styles', 'clean'], function(){
+
   return gulp.src(paths.styles.src)
 
     .pipe(sourcemaps.init())
@@ -27,5 +29,14 @@ gulp.task('styles', ['clean'], function(){
 
     .pipe(sourcemaps.write('.'))
 
+    .pipe(concat('styles.css'))
+
     .pipe(gulp.dest(paths.styles.dest));
+});
+
+gulp.task('vendor:styles', ['clean'], function(){
+
+  return gulp.src(paths.vendor.styles.src)
+    .pipe(gulp.dest(paths.vendor.styles.dest));
+
 });

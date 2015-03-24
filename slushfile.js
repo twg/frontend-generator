@@ -71,6 +71,11 @@ gulp.task('default', function (done) {
             name: 'TWG Frontend Scaffolding',
             value: 'scaffolding',
             checked: true
+          },
+          {
+            name: 'AngularJS',
+            value: 'angular',
+            checked: true
           }
         ]
 

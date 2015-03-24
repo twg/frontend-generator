@@ -8,7 +8,7 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var notify = require('gulp-notify');
 
-gulp.task('scripts', ['clean'], function(){
+gulp.task('scripts', ['vendor:scripts', 'clean'], function(){
   return gulp.src(paths.scripts.src)
 
     .pipe(concat({path: 'scripts.js', cwd: ''}))
@@ -19,4 +19,11 @@ gulp.task('scripts', ['clean'], function(){
     })))
 
     .pipe(gulp.dest(paths.scripts.dest));
+});
+
+gulp.task('vendor:scripts', ['clean'], function(){
+
+  return gulp.src(paths.vendor.scripts.src)
+    .pipe(gulp.dest(paths.vendor.scripts.dest));
+
 });
