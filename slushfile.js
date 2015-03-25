@@ -29,12 +29,18 @@ var questions = [
     choices: [
       {
         name: 'TWG Front-end Scaffolding',
-        value: {'twg-frontend-scaffolding':'latest'},
+        value: {
+          'twg-frontend-scaffolding':'latest',
+          'styles': ['bower_components/twg-frontend-scaffolding/dist/_scaffolding.styl']
+        },
         checked: true
       },
       {
         name: 'AngularJS',
-        value: {'angular-latest':'latest'},
+        value: {
+          'angular':'latest',
+          'scripts': ['bower_components/angular/angular.js']
+        },
         checked: true
       }
     ]
@@ -86,13 +92,27 @@ function getDefaults(){
 
 function convertIncludesArray(includes){
   var results = {};
+  var scriptPaths = [];
+  var stylePaths = [];
   for(var i=0; i<includes.length; i++){
     var include = includes[i];
     for(var k in include){
-      results[k] = include[k];
+      if(k === 'styles'){
+        stylePaths.push(include[k]);
+      }
+      else if(k === 'scripts'){
+        scriptPaths.push(include[k]);
+      }
+      else{
+        results[k] = include[k];
+      }
     }
   }
-  return results;
+  return {
+    results: results,
+    scripts: scriptPaths,
+    styles: stylePaths
+  };
 }
 
 gulp.task('default', function (done) {
@@ -100,8 +120,13 @@ gulp.task('default', function (done) {
     function (answers) {
 
       var includes = convertIncludesArray(answers.appIncludes);
-      answers.appIncludes = JSON.stringify(includes);
+      answers.appIncludes = JSON.stringify(includes.results);
+      answers.appStyleIncludes = JSON.stringify(includes.styles);
 
+      console.log(answers.appIncludes);
+      console.log(answers.appStyleIncludes);
+
+      /*
       answers.appNameSlug = _.slugify(answers.appName);
       answers.appError = '<%= error.message %>';
       gulp.src([__dirname + '/templates/**'], {dot: true})
@@ -117,6 +142,7 @@ gulp.task('default', function (done) {
         .on('end', function () {
           done();
         });
+      */
 
     });
 });
