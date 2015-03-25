@@ -33,6 +33,11 @@ Slush does not contain anything "out of the box", except the ability to locate i
 
 To find out more about Slush, check out the [documentation](https://github.com/slushjs/slush).
 
+## Todo
+
+- re-order js so vendor files are included first
+- revision needs to clean directories, currently creates duplicate files
+
 ## Contributing
 
 See the [CONTRIBUTING Guidelines](https://github.com/themarkappleby/slush-twg/blob/master/CONTRIBUTING.md)

@@ -7,9 +7,15 @@ var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var notify = require('gulp-notify');
+var order = require('gulp-order'); 
 
 gulp.task('scripts', ['vendor:scripts', 'clean'], function(){
   return gulp.src(paths.scripts.src)
+
+    .pipe(order([
+      'src/scripts/vendor/**/*.js',
+      paths.scripts.src
+    ]))
 
     .pipe(concat({path: 'scripts.js', cwd: ''}))
 
