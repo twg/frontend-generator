@@ -23,25 +23,33 @@ var questions = [
     default: 'Client Node application'
   },
   {
-    name: 'appIncludes',
-    message: 'Select includes:',
+    name: 'appDependencies',
+    message: 'Select dependencies:',
     type: 'checkbox',
     choices: [
       {
         name: 'TWG Front-end Scaffolding',
+        checked: true,
         value: {
           'twg-frontend-scaffolding':'latest',
           'styles': ['bower_components/twg-frontend-scaffolding/dist/_scaffolding.styl']
-        },
-        checked: true
+        }
       },
       {
         name: 'AngularJS',
+        checked: true,
         value: {
           'angular':'latest',
           'scripts': ['bower_components/angular/angular.js']
-        },
-        checked: true
+        }
+      },
+      {
+        name: 'Animate.css',
+        checked: true,
+        value: {
+          'animate.css':'latest',
+          'styles': 'bower_components/animate.css/animate.css'
+        }
       }
     ]
   }
@@ -90,43 +98,53 @@ function getDefaults(){
   };
 }
 
-function convertIncludesArray(includes){
-  var results = {};
-  var scriptPaths = [];
-  var stylePaths = [];
-  for(var i=0; i<includes.length; i++){
-    var include = includes[i];
-    for(var k in include){
+function parseDependencies(rawDependencies){
+  var dependencies = {};
+  var dependencyStyles = [];
+  var dependencyScripts = [];
+
+  for(var i=0; i<rawDependencies.length; i++){
+    var rawDependency = rawDependencies[i];
+    for(var k in rawDependency){
       if(k === 'styles'){
-        stylePaths.push(include[k]);
+        dependencyStyles = appendDependencies(dependencyStyles, rawDependency[k]);
       }
       else if(k === 'scripts'){
-        scriptPaths.push(include[k]);
+        dependencyScripts = appendDependencies(dependencyScripts, rawDependency[k]);
       }
       else{
-        results[k] = include[k];
+        dependencies[k] = rawDependency[k];
       }
     }
   }
   return {
-    results: results,
-    scripts: scriptPaths,
-    styles: stylePaths
+    names: dependencies,
+    styles: dependencyStyles,
+    scripts: dependencyScripts
   };
+}
+
+function appendDependencies(dependencies, newItems){
+  if(newItems.constructor === Array){
+    for(var i=0; i<newItems.length; i++){
+      dependencies.push(newItems[i]);
+    }
+  }
+  else{
+    dependencies.push(newItems);
+  }
+  return dependencies;
 }
 
 gulp.task('default', function (done) {
   inquirer.prompt(questions,
     function (answers) {
 
-      var includes = convertIncludesArray(answers.appIncludes);
-      answers.appIncludes = JSON.stringify(includes.results);
-      answers.appStyleIncludes = JSON.stringify(includes.styles);
+      var dependencies = parseDependencies(answers.appDependencies);
+      answers.appDependencies = JSON.stringify(dependencies.names, null, 2);
+      answers.appDependencyStyles = JSON.stringify(dependencies.styles, null, 2);
+      answers.appDependencyScripts = JSON.stringify(dependencies.scripts, null, 2);
 
-      console.log(answers.appIncludes);
-      console.log(answers.appStyleIncludes);
-
-      /*
       answers.appNameSlug = _.slugify(answers.appName);
       answers.appError = '<%= error.message %>';
       gulp.src([__dirname + '/templates/**'], {dot: true})
@@ -142,7 +160,6 @@ gulp.task('default', function (done) {
         .on('end', function () {
           done();
         });
-      */
 
     });
 });

@@ -1,7 +1,4 @@
 module.exports = {
-  scripts: [
-  ],
-
-  styles: [
-  ]
+  styles: <%= appDependencyStyles %>,
+  scripts: <%= appDependencyScripts %>
 };
