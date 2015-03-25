@@ -28,13 +28,13 @@ var questions = [
     type: 'checkbox',
     choices: [
       {
-        name: 'TWG Frontend Scaffolding',
-        value: 'scaffolding',
+        name: 'TWG Front-end Scaffolding',
+        value: {'twg-frontend-scaffolding':'latest'},
         checked: true
       },
       {
         name: 'AngularJS',
-        value: 'angular',
+        value: {'angular-latest':'latest'},
         checked: true
       }
     ]
@@ -84,9 +84,24 @@ function getDefaults(){
   };
 }
 
+function convertIncludesArray(includes){
+  var results = {};
+  for(var i=0; i<includes.length; i++){
+    var include = includes[i];
+    for(var k in include){
+      results[k] = include[k];
+    }
+  }
+  return results;
+}
+
 gulp.task('default', function (done) {
   inquirer.prompt(questions,
     function (answers) {
+
+      var includes = convertIncludesArray(answers.appIncludes);
+      answers.appIncludes = JSON.stringify(includes);
+
       answers.appNameSlug = _.slugify(answers.appName);
       answers.appError = '<%= error.message %>';
       gulp.src([__dirname + '/templates/**'], {dot: true})
@@ -102,5 +117,6 @@ gulp.task('default', function (done) {
         .on('end', function () {
           done();
         });
+
     });
 });

@@ -13,12 +13,5 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    <% if(appIncludes.indexOf("scaffolding") > -1){ %>
-    "angular-latest": "latest",
-    <% } %>
-    <% if(appIncludes.indexOf("scaffolding") > -1){ %>
-    "twg-frontend-scaffolding": "latest"
-    <% } %>
-  }
+  "dependencies": <%= appIncludes %>
 }
