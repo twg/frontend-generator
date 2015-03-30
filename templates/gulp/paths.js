@@ -1,4 +1,5 @@
-var bowerPaths = require('./bowerPaths.js');
+var bowerStyles = <%= appDependencyStyles %>;
+var bowerScripts = <%= appDependencyScripts %>;
 
 module.exports = {
   root: 'dist/',
@@ -20,12 +21,12 @@ module.exports = {
   vendor: {
     styles: {
       watch: ['bower_components/**/*.css', 'bower_components/**/*.styl'],
-      src: bowerPaths.styles,
+      src: bowerStyles,
       dest: 'src/styles/vendor'
     },
     scripts: {
       watch: 'bower_components/**/*.js',
-      src: bowerPaths.scripts,
+      src: bowerScripts,
       dest: 'src/scripts/vendor'
     }
   }

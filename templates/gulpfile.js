@@ -5,8 +5,7 @@ requireDir('./gulp');
 gulp.task('build', [
   'styles',
   'scripts',
-  'templates',
-  'revision'
+  'templates'
 ]);
 
 gulp.task('default', ['build', 'server', 'watch']);

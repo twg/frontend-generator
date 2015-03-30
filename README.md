@@ -2,8 +2,9 @@
 
 > A Slush generator for boilerplate node/gulp projects
 
-
 ## Getting Started
+
+There is no need to clone/download this repo if you just want to use this generator, instead you can simply install the generator globally on your machine via NPM.
 
 Install `slush-twg` globally:
 

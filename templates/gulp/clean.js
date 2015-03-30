@@ -1,5 +1,5 @@
 /* 
- * Destorys the destination folder before re-populating it.
+ * Destroys the destination folder before re-populating it.
  * Clean will not run while Gulp is watching.
  */
 
@@ -18,4 +18,13 @@ gulp.task('clean', function(cb){
     return cb();
   }
 
+});
+
+gulp.task('clean:styles', function(cb){
+  del(paths.styles.dest, cb);
+});
+
+
+gulp.task('clean:scripts', function(cb){
+  del(paths.scripts.dest, cb);
 });
