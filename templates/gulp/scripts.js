@@ -7,14 +7,16 @@ var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var notify = require('gulp-notify');
-var streamqueue  = require('streamqueue');
+var order = require('gulp-order');
 
 gulp.task('scripts', ['clean', 'clean:scripts', 'vendor:scripts'], function(){
 
-  return streamqueue({objectMode: true},
-      gulp.src(paths.vendor.scripts.dest + '/**/*'),
-      gulp.src(['!' + paths.vendor.scripts.dest + '/**/*' , paths.scripts.src])
-    )
+  return gulp.src(paths.scripts.src)
+
+    .pipe(order([
+      'src/scripts/vendor/**/*.js',
+      paths.scripts.src
+    ], {base: '.'}))
 
     .pipe(concat({path: 'scripts.js', cwd: ''}))
 

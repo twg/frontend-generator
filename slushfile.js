@@ -6,8 +6,6 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
-
 var path = require('path');
 var defaults = getDefaults();
 
